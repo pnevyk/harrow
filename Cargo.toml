@@ -1,0 +1,22 @@
+[package]
+name = "harrow"
+version = "0.1.0" # remember to update html_root_url
+authors = ["Petr Nevyhoštěný <petr.nevyhosteny@gmail.com>"]
+edition = "2018"
+description = "A low-level library for making file-backed storage for huge data structures"
+license = "MIT or UNLICENSE"
+repository = "https://github.com/pnevyk/harrow"
+keywords = ["mmap", "file", "data structures"]
+categories = ["memory-management", "filesystem", "data-structures"]
+
+[dependencies]
+once_cell = "1.5.2"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2.80"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3.9", features = ["minwindef", "winnt", "winbase", "basetsd", "fileapi", "memoryapi", "handleapi", "sysinfoapi", "impl-default"] }
+
+[profile.dev]
+panic = "unwind"  # for tests
